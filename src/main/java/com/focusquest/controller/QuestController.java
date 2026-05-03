@@ -3,6 +3,7 @@ package com.focusquest.controller;
 import com.focusquest.dto.request.QuestRequestDTO;
 import com.focusquest.dto.response.QuestResponseDTO;
 import com.focusquest.service.QuestService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,9 @@ public class QuestController {
     private final QuestService questService;
 
     @PostMapping
-    public ResponseEntity<QuestResponseDTO> createQuest(@RequestBody QuestRequestDTO request) {
+    public ResponseEntity<QuestResponseDTO> createQuest(
+            @Valid @RequestBody QuestRequestDTO request
+    ) {
 
         QuestResponseDTO response = questService.createQuest(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -38,7 +41,10 @@ public class QuestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<QuestResponseDTO> updateQuestById(@PathVariable UUID id, QuestRequestDTO request) {
+    public ResponseEntity<QuestResponseDTO> updateQuestById(
+            @PathVariable UUID id,
+            @Valid @RequestBody QuestRequestDTO request
+    ) {
 
         return ResponseEntity.ok(questService.updateQuestById(id, request));
     }
