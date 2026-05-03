@@ -55,6 +55,20 @@ public class QuestService {
         return mapToQuestResponseDTO(quest);
     }
 
+    public QuestResponseDTO updateQuestById(UUID id, QuestRequestDTO request) {
+
+        Quest quest = findQuestById(id);
+
+        quest.setTitle(request.getTitle());
+        quest.setDescription(request.getDescription());
+        quest.setXpReward(request.getXpReward());
+        quest.setUpdatedAt(LocalDateTime.now());
+
+        Quest saveQuest = questRepository.save(quest);
+
+        return mapToQuestResponseDTO(saveQuest);
+    }
+
     public QuestResponseDTO completeQuest(UUID id) {
 
         LocalDateTime now = LocalDateTime.now();

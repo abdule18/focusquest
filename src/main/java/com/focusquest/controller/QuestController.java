@@ -37,6 +37,12 @@ public class QuestController {
         return ResponseEntity.ok(questService.getQuestById(id));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<QuestResponseDTO> updateQuestById(@PathVariable UUID id, QuestRequestDTO request) {
+
+        return ResponseEntity.ok(questService.updateQuestById(id, request));
+    }
+
     @PutMapping("/{id}/complete")
     public ResponseEntity<QuestResponseDTO> completeQuest(@PathVariable UUID id) {
         return ResponseEntity.ok(questService.completeQuest(id));
