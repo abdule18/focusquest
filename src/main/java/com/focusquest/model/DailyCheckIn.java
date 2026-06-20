@@ -22,7 +22,6 @@ public class DailyCheckIn {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-
     @Column(name = "mood_level", nullable = false)
     @Enumerated(EnumType.STRING)
     private MoodLevel moodLevel;
