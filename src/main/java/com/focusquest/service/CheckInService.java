@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -32,6 +33,15 @@ public class CheckInService {
         DailyCheckIn savedCheckIn = checkInRepository.save(dailyCheckIn);
 
         return  mapToDailyCheckInResponseDTO(savedCheckIn);
+    }
+
+    public List<CheckInResponseDTO> getAllCheckIns() {
+        List<DailyCheckIn> checkIn = checkInRepository.findAll();
+
+        return checkIn
+                .stream()
+                .map(this::mapToDailyCheckInResponseDTO)
+                .toList();
     }
 
     private CheckInResponseDTO mapToDailyCheckInResponseDTO(DailyCheckIn dailyCheckIn) {

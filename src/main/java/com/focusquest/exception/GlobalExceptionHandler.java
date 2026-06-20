@@ -50,6 +50,26 @@ public class GlobalExceptionHandler {
             errors.put("xpReward", fieldErrors.get("xpReward"));
         }
 
+        if (fieldErrors.containsKey("moodLevel")) {
+            errors.put("moodLevel", fieldErrors.get("moodLevel"));
+        }
+
+        if (fieldErrors.containsKey("urgeLevel")) {
+            errors.put("urgeLevel", fieldErrors.get("urgeLevel"));
+        }
+
+        if (fieldErrors.containsKey("hadUrge")) {
+            errors.put("hadUrge", fieldErrors.get("hadUrge"));
+        }
+
+        if (fieldErrors.containsKey("relapsed")) {
+            errors.put("relapsed", fieldErrors.get("relapsed"));
+        }
+
+        if (fieldErrors.containsKey("reflection")) {
+            errors.put("reflection", fieldErrors.get("reflection"));
+        }
+
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .message("Validation failed")
                 .status(HttpStatus.BAD_REQUEST.value())
