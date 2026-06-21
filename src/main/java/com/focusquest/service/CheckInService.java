@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
@@ -44,6 +45,16 @@ public class CheckInService {
                 .toList();
     }
 
+    public CheckInResponseDTO getCheckInById(UUID id) {
+
+        DailyCheckIn checkIn = findCheckInById(id);
+
+        return mapToDailyCheckInResponseDTO(checkIn);
+    }
+
+
+    // =================== Helper methods ===================== //
+
     private CheckInResponseDTO mapToDailyCheckInResponseDTO(DailyCheckIn dailyCheckIn) {
 
         return CheckInResponseDTO.builder()
@@ -55,5 +66,11 @@ public class CheckInService {
                 .reflection(dailyCheckIn.getReflection())
                 .createdAt(dailyCheckIn.getCreatedAt())
                 .build();
+    }
+
+
+    private DailyCheckIn findCheckInById(UUID id) {
+        return checkInRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Check—in not found"));
     }
 }
