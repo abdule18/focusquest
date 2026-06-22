@@ -37,6 +37,13 @@ public class UrgeController {
     public ResponseEntity<UrgeResponseDTO> getUrgeById(@PathVariable UUID id) {
 
         return ResponseEntity.ok(urgeService.getUrgeById(id));
-
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUrge(@PathVariable UUID id) {
+
+        urgeService.deleteUrge(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

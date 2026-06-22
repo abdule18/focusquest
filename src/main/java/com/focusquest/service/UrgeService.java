@@ -2,6 +2,7 @@ package com.focusquest.service;
 
 import com.focusquest.dto.request.UrgeRequestDTO;
 import com.focusquest.dto.response.UrgeResponseDTO;
+import com.focusquest.exception.ResourceNotFoundException;
 import com.focusquest.model.UrgeLog;
 import com.focusquest.repositories.UrgeRepository;
 import lombok.AllArgsConstructor;
@@ -54,7 +55,11 @@ public class UrgeService {
         return mapToUrgeResponseDTO(urgeLog);
     }
 
+    public void deleteUrge(UUID id) {
 
+        UrgeLog urgeLog = findUrgeById(id);
+        urgeRepository.delete(urgeLog);
+    }
 
 
     // =================== Helper methods ===================== //
@@ -73,7 +78,7 @@ public class UrgeService {
     private UrgeLog findUrgeById(UUID id)  {
 
         return urgeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Urge not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Urge not found"));
     }
 
 
