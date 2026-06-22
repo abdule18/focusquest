@@ -43,6 +43,5 @@ public class UserProfile {
     private int recoveryScore;
 
     @Column(name = "created_at", nullable = false)
-    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime createdAt;
 }

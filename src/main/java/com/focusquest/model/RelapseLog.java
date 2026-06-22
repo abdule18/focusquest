@@ -34,6 +34,5 @@ public class RelapseLog {
     private String preventionPlan;
 
     @Column(name = "created_at", nullable = false)
-    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime createdAt;
 }
