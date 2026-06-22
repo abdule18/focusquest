@@ -1,5 +1,6 @@
 package com.focusquest.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.focusquest.enums.QuestStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,11 +38,14 @@ public class Quest {
     private QuestStatus status;
 
     @Column(name = "created_at", nullable = false)
+    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
+    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime updatedAt;
 
     @Column(name = "completed_at")
+    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime completedAt;
 }

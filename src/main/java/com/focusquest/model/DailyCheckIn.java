@@ -1,5 +1,6 @@
 package com.focusquest.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.focusquest.enums.MoodLevel;
 import com.focusquest.enums.UrgeStatus;
 import jakarta.persistence.*;

@@ -1,5 +1,6 @@
 package com.focusquest.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,5 +34,6 @@ public class RelapseLog {
     private String preventionPlan;
 
     @Column(name = "created_at", nullable = false)
+    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime createdAt;
 }

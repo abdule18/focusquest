@@ -1,5 +1,6 @@
 package com.focusquest.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.focusquest.enums.QuestStatus;
 import lombok.*;
 
@@ -20,7 +21,10 @@ public class QuestResponseDTO {
     private String description;
     private int xpReward;
     private QuestStatus status;
+    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime createdAt;
+    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime updatedAt;
+    @JsonFormat(pattern = "MM-dd-yyyy hh:mm a")
     private LocalDateTime completedAt;
 }

@@ -37,4 +37,22 @@ public class CheckInController {
     public ResponseEntity<CheckInResponseDTO> getCheckInById(@PathVariable UUID id) {
         return ResponseEntity.ok(checkInService.getCheckInById(id));
     }
+
+    @GetMapping("/today")
+    public ResponseEntity<List<CheckInResponseDTO>> getTodayCheckIns() {
+
+        // call service
+        List<CheckInResponseDTO> checkIns = checkInService.getTodayCheckIns();
+        // return 200 OK
+        return ResponseEntity.ok(checkIns);
+
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCheckIn(@PathVariable UUID id) {
+
+        checkInService.deleteCheckIn(id);
+        return ResponseEntity.noContent().build();
+    }
 }
