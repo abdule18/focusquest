@@ -70,6 +70,32 @@ public class GlobalExceptionHandler {
             errors.put("reflection", fieldErrors.get("reflection"));
         }
 
+        // UrgeLog validation fields
+        if (fieldErrors.containsKey("trigger")) {
+            errors.put("trigger", fieldErrors.get("trigger"));
+        }
+
+        if (fieldErrors.containsKey("actionTaken")) {
+            errors.put("actionTaken", fieldErrors.get("actionTaken"));
+        }
+
+        if (fieldErrors.containsKey("resisted")) {
+            errors.put("resisted", fieldErrors.get("resisted"));
+        }
+
+        // RelapseLog validation fields
+        if (fieldErrors.containsKey("whatHappened")) {
+            errors.put("whatHappened", fieldErrors.get("whatHappened"));
+        }
+
+        if (fieldErrors.containsKey("lessonLearned")) {
+            errors.put("lessonLearned", fieldErrors.get("lessonLearned"));
+        }
+
+        if (fieldErrors.containsKey("preventionPlan")) {
+            errors.put("preventionPlan", fieldErrors.get("preventionPlan"));
+        }
+
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .message("Validation failed")
                 .status(HttpStatus.BAD_REQUEST.value())
