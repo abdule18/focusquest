@@ -12,12 +12,12 @@ import lombok.*;
 
 public class RelapseRequestDTO {
 
-    @NotBlank(message = "trigger is required")
+    @NotBlank(message = "Trigger is required")
     private String trigger;
-    @NotBlank(message = "what happened is required")
+    @NotBlank(message = "What happened is required")
     private String whatHappened;
-    @NotBlank(message = "lesson learned is required")
+    @NotBlank(message = "Lesson learned is required")
     private String lessonLearned;
-    @NotBlank(message = "prevention plan is required")
+    @NotBlank(message = "Prevention plan is required")
     private String preventionPlan;
 }

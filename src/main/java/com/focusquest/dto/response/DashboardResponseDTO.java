@@ -2,6 +2,8 @@ package com.focusquest.dto.response;
 
 import lombok.*;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class DashboardResponseDTO {
     private long resistedUrges;
     private long totalRelapses;
     private int recoveryScore;
+    private Map<String, Integer> triggerCounts;
 }

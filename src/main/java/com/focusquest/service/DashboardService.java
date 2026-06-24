@@ -2,12 +2,17 @@ package com.focusquest.service;
 
 import com.focusquest.dto.response.DashboardResponseDTO;
 import com.focusquest.enums.QuestStatus;
+import com.focusquest.model.UrgeLog;
 import com.focusquest.repositories.CheckInRepository;
 import com.focusquest.repositories.QuestRepository;
 import com.focusquest.repositories.RelapseRepository;
 import com.focusquest.repositories.UrgeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -26,6 +31,20 @@ public class DashboardService {
 
         long completedQuests  =  questRepository.countByStatus(QuestStatus.COMPLETED);
         long resistedUrges = urgeRepository.countByResisted(true);
+        List<UrgeLog> urges = urgeRepository.findAll();
+
+        Map<String, Integer> triggerCounts = new HashMap<>();
+
+        for (UrgeLog urge : urges) {
+            String trigger = urge.getTrigger();
+
+            if (triggerCounts.containsKey(trigger)) {
+                int oldCount = triggerCounts.get(trigger);
+                triggerCounts.put(trigger, oldCount + 1);
+            } else {
+                triggerCounts.put(trigger, 1);
+            }
+        }
 
         long score = 100 - (totalRelapses * 10) + (resistedUrges * 2);
 
@@ -47,6 +66,7 @@ public class DashboardService {
                 .resistedUrges(resistedUrges)
                 .totalRelapses(totalRelapses)
                 .recoveryScore(recoveryScore)
+                .triggerCounts(triggerCounts)
                 .build();
     }
 }
