@@ -2,6 +2,7 @@ package com.focusquest.service;
 
 import com.focusquest.dto.request.CheckInRequestDTO;
 import com.focusquest.dto.response.CheckInResponseDTO;
+import com.focusquest.exception.ResourceNotFoundException;
 import com.focusquest.model.DailyCheckIn;
 import com.focusquest.repositories.CheckInRepository;
 import lombok.AllArgsConstructor;
@@ -100,6 +101,6 @@ public class CheckInService {
 
     private DailyCheckIn findCheckInById(UUID id) {
         return checkInRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Check—in not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Check—in not found"));
     }
 }
