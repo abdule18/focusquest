@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +21,7 @@ import java.util.UUID;
 public class QuestService {
 
     private final QuestRepository questRepository;
+    private final Deque<UUID> recentlyCompletedQuestIds = new ArrayDeque<>();
 
     public QuestResponseDTO createQuest(QuestRequestDTO request) {
 
@@ -64,9 +67,26 @@ public class QuestService {
         quest.setXpReward(request.getXpReward());
         quest.setUpdatedAt(LocalDateTime.now());
 
-        Quest saveQuest = questRepository.save(quest);
+        Quest savedQuest = questRepository.save(quest);
 
-        return mapToQuestResponseDTO(saveQuest);
+        return mapToQuestResponseDTO(savedQuest);
+    }
+
+    public QuestResponseDTO undoLastQuest() {
+
+        if (recentlyCompletedQuestIds.isEmpty()) {
+            throw new ResourceNotFoundException("No quest completed");
+        }
+        UUID undone = recentlyCompletedQuestIds.pop();
+
+        Quest quest = findQuestById(undone);
+
+        quest.setStatus(QuestStatus.NOT_STARTED);
+        quest.setCompletedAt(null);
+
+        Quest savedQuest = questRepository.save(quest);
+
+        return mapToQuestResponseDTO(savedQuest);
     }
 
     public QuestResponseDTO completeQuest(UUID id) {
@@ -80,6 +100,8 @@ public class QuestService {
         quest.setUpdatedAt(now);
 
         Quest saveQuest = questRepository.save(quest);
+
+        recentlyCompletedQuestIds.push(id);
 
         return mapToQuestResponseDTO(saveQuest);
     }

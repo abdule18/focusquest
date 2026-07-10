@@ -54,6 +54,11 @@ public class QuestController {
         return ResponseEntity.ok(questService.completeQuest(id));
     }
 
+    @PostMapping("/undo")
+    public ResponseEntity<QuestResponseDTO> undoLastQuest() {
+        return ResponseEntity.ok(questService.undoLastQuest());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteQuest(@PathVariable UUID id) {
 
