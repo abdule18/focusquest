@@ -22,6 +22,7 @@ public class QuestService {
 
     private final QuestRepository questRepository;
     private final Deque<UUID> recentlyCompletedQuestIds = new ArrayDeque<>();
+    private final  Deque<String> longestWaitedQuest = new ArrayDeque<>();
 
     public QuestResponseDTO createQuest(QuestRequestDTO request) {
 

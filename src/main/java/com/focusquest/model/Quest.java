@@ -1,6 +1,5 @@
 package com.focusquest.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.focusquest.enums.QuestStatus;
 import jakarta.persistence.*;
 import lombok.*;

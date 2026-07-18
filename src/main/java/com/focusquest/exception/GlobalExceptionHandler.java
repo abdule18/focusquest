@@ -27,6 +27,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseDTO> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+
+        ErrorResponseDTO error = ErrorResponseDTO.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.CONFLICT.value())
+                .timestamp(LocalDateTime.now())
+                .errors(null)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleValidationException(MethodArgumentNotValidException ex) {
 
